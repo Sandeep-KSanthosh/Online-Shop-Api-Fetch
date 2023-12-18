@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shop</title>
+    <link rel="shortcut icon" href="https://thumbs.dreamstime.com/t/supermarket-cart-icon-vector-sign-symbol-isolated-white-background-logo-concept-your-web-mobile-app-design-134158992.jpg" type="image/x-icon">
+    <link rel="icon" type="image" href="./images/cart5.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <style>
+            .cart-logo {
+                display: flex;
+                align-items: center;
+                color: white;
+                text-decoration: none;
+                margin-top: 10px;
+                size: 40px;
+            }
+    
+            .cart-logo i {
+                margin-right: 8px;
+                margin-top: 10px;
+            }
+        </style>
+</head>
+
+<body class="bg-light">
+    <header style="position: sticky;">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+              
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="#" class="cart-logo">
+                        <i style="font-size: xx-large;" class="fa-solid fa-cart-shopping fa-lg"></i>
+                        <span style="margin-top: 10px; font-size: xx-large; font-weight: 900;">Shoppify</span>
+                    </a>
+                    <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                            <use xlink:href="#bootstrap" />
+                        </svg>
+                    </a>
+              
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                    <use xlink:href="#home" />
+                                </svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                    <use xlink:href="#speedometer2" />
+                                </svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                    <use xlink:href="#table" />
+                                </svg>
+                                Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                    <use xlink:href="#grid" />
+                                </svg>
+                                Products
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                    <use xlink:href="#people-circle" />
+                                </svg>
+                                Customers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+                <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-end">
+                    <button type="button" class="btn btn-light text-dark me-2">Login</button>
+                    <button type="button" class="btn btn-success">Sign-up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="result" class="row row-cols-lg-3 row-cols-xl-3 mt-3 lh-1">
+        </div>
+    </div>
+
+    <script>
+        fetch("https://dummyjson.com/carts")
+            .then(data => data.json())
+            .then(data => {
+                console.log(data);
+                displayCarts(data);
+            });
+
+        function displayCarts(data) {
+            for (i of data.carts) {
+                for (j of i.products) {
+                    output = `<div class="col mt-2">
+                        <div class=" card shadow-5 mx-auto border-1 rounded-2" style="width: 18rem;">
+                            <img src="${j.thumbnail}" class="card-img-top img-fluid rounded-3 mx-auto mt-2"
+                                style="max-height:200px; max-width:200px; min-height:200px; object-fit:contain;" alt="...">
+                            <div class="card-body fw-medium text-start">
+                                <h5 class="card-title text-dark text-center" style="height:3rem">${j.title}</h5>
+                                <p class="card-text">Id -${j.id} </p>
+                                <p class="card-text">Price - ${j.price} Rs </p>
+                                <p class="card-text">Quantity - ${j.quantity} </p>
+                                <p class="card-text">Total - ${j.total} Rs</p>
+                                <p class="card-text">Discount Percentage - ${j.discountPercentage}</p>
+                                <p class="card-text text-danger fs-5">Discount price - ${j.discountedPrice} Rs</p>
+                                <a href="#" class="btn btn-success col d-flex justify-content-center  fw-medium">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>`;
+
+                    result.innerHTML += output;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
